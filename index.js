@@ -20,7 +20,7 @@ try{ let sound = await soundbarModel.find({})
   
     res.send(sound)}
     catch(e){
-        console.log("error")
+        res.status(401).send("Invalid api")
     }
 })
 
@@ -28,21 +28,22 @@ app.get("/watch", async(req,res)=>{
    try {let laptop = await watchModel.find({})
     res.send(laptop)}
     catch(e){
-        console.log("error")
+        res.status(401).send("Invalid api")
     }
 })
 app.get("/appliance", async(req,res)=>{
     try {let laptop = await applianceModel.find({})
      res.send(laptop)}
      catch(e){
-         console.log("error")
+        res.status(401).send("Invalid api")
      }
  })
  app.get("/laptop", async(req,res)=>{
     try {let laptop = await laptop.find({})
-     res.send(laptop)}
+     res.status(200).send(laptop)
+    }
      catch(e){
-         console.log("error")
+        res.status(401).send("Invalid api")
      }
  })
 
@@ -52,7 +53,7 @@ app.post("/signup",(req,res)=>{
     user.save()
     res.send(user)}
     catch(e){
-        console.log("error")
+        res.status(401).send("Invalid creditional")
     }
 })
 app.post("/login",(req,res)=>{
