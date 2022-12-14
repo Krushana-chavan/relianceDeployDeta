@@ -2,6 +2,7 @@ require("dotenv").config()
 const express = require('express')
 const  mongoose  = require('mongoose')
 const applianceModel = require('./schema/appliance.model')
+const laptopModel = require("./schema/laptops.model")
 const soundbarModel = require('./schema/soundbar.model')
 const UserModel = require('./schema/user.model')
 const watchModel = require('./schema/watch.model')
@@ -18,7 +19,7 @@ app.use(express.json())
 app.get("/soundbar", async(req,res)=>{
 try{ let sound = await soundbarModel.find({})
   
-    res.send(sound)}
+    res.status(200).send(sound)}
     catch(e){
         res.status(401).send("Invalid api")
     }
@@ -26,7 +27,7 @@ try{ let sound = await soundbarModel.find({})
 
 app.get("/watch", async(req,res)=>{
    try {let laptop = await watchModel.find({})
-    res.send(laptop)}
+    res.status(200).send(laptop)}
     catch(e){
         res.status(401).send("Invalid api")
     }
@@ -39,7 +40,7 @@ app.get("/appliance", async(req,res)=>{
      }
  })
  app.get("/laptop", async(req,res)=>{
-    try {let laptop = await laptop.find({})
+    try {let laptop = await laptopModel.find({})
      res.status(200).send(laptop)
     }
      catch(e){
@@ -61,9 +62,9 @@ app.post("/login",(req,res)=>{
         const{email,password,phonenumber}= req.body
     let user =  UserModel.findOne({email,password,phonenumber});
    
-    res.send(user)}
+    res.status(200).send(user)}
     catch(e){
-        console.log("error")
+        res.status(401).send("user not genertated")
     }
 })
 mongoose.connect(process.env.db_url).then(()=>{
