@@ -4,6 +4,7 @@ const  mongoose  = require('mongoose')
 const applianceModel = require('./schema/appliance.model')
 const laptopModel = require("./schema/laptops.model")
 const soundbarModel = require('./schema/soundbar.model')
+const telivisionModel = require("./schema/telivision.model")
 const UserModel = require('./schema/user.model')
 const watchModel = require('./schema/watch.model')
  
@@ -42,6 +43,15 @@ app.get("/appliance", async(req,res)=>{
  app.get("/laptop", async(req,res)=>{
     try {let laptop = await laptopModel.find({})
      res.status(200).send(laptop)
+    }
+     catch(e){
+        res.status(401).send("Invalid api")
+     }
+ })
+
+ app.get("/telivison", async(req,res)=>{
+    try {let telivision = await telivisionModel.find({})
+     res.status(200).send(telivision)
     }
      catch(e){
         res.status(401).send("Invalid api")
