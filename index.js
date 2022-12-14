@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require('express')
 const  mongoose  = require('mongoose')
 const applianceModel = require('./schema/appliance.model')
@@ -64,7 +65,7 @@ app.post("/login",(req,res)=>{
         console.log("error")
     }
 })
-mongoose.connect("mongodb+srv://Krushna:8788@cluster0.ottwj2f.mongodb.net/Reliance?retryWrites=true&w=majority").then(()=>{
+mongoose.connect(process.env.db_url).then(()=>{
     app.listen(8080,()=>{  console.log('server statrted on port 8080')})
 })
 
