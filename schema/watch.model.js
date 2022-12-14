@@ -18,5 +18,5 @@ const watchschema = new Schema({
   img3: String,
 });
 
-const watchModel = model("watchg", watchschema);
+const watchModel = model("watch", watchschema);
 module.exports = watchModel;
