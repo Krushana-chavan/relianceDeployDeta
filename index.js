@@ -111,22 +111,24 @@ app.post("/telivison", async (req, res) => {
 
 app.post("/signup", (req, res) => {
   try {
-    const { name, email, role, password, phonenumber } = req.body;
-    let user = new UserModel({ name, email, role, password, phonenumber });
+    const { name, email, role, password,phonenumber } = req.body;
+    let user = new UserModel({ name, email, role, password,phonenumber});
     user.save();
     res.send(user);
   } catch (e) {
     res.status(401).send("Invalid creditional");
   }
 });
-app.post("/login", (req, res) => {
+app.get("/login", async(req, res) => {
+ 
   try {
-    const { email, password, phonenumber } = req.body;
-    let user = UserModel.findOne({ email, password, phonenumber });
-
+    const { email,password,phonenumber} = req.body;
+    
+    const user = await UserModel.findOne({ email,password,phonenumber });
+    console.log(user)
     res.status(200).send(user);
   } catch (e) {
-    res.status(401).send("user not genertated");
+    res.status(401).send("user not found");
   }
 });
 mongoose.connect(process.env.db_url).then(() => {
