@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require('cors')
 const applianceModel = require("./schema/appliance.model");
 const laptopModel = require("./schema/laptops.model");
 const soundbarModel = require("./schema/soundbar.model");
@@ -9,7 +10,7 @@ const UserModel = require("./schema/user.model");
 const watchModel = require("./schema/watch.model");
 
 const app = express();
-
+app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
@@ -125,7 +126,7 @@ app.post("/login", async(req, res) => {
     const { email,password,phonenumber} = req.body;
     
     const user = await UserModel.findOne({ email,password,phonenumber });
-    
+   
     res.status(200).send(user);
   } catch (error) {
     res.status(401).send(error);
