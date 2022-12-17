@@ -119,16 +119,16 @@ app.post("/signup", (req, res) => {
     res.status(401).send("Invalid creditional");
   }
 });
-app.get("/login", async(req, res) => {
+app.post("/login", async(req, res) => {
  
   try {
     const { email,password,phonenumber} = req.body;
     
     const user = await UserModel.findOne({ email,password,phonenumber });
-    console.log(user)
+    
     res.status(200).send(user);
-  } catch (e) {
-    res.status(401).send("user not found");
+  } catch (error) {
+    res.status(401).send(error);
   }
 });
 mongoose.connect(process.env.db_url).then(() => {
