@@ -9,6 +9,10 @@ const telivisionModel = require("./schema/telivision.model");
 const UserModel = require("./schema/user.model");
 const watchModel = require("./schema/watch.model");
 const adminmodel = require("./schema/admin.model");
+const maxgirlModel = require("./schema/maxgirl.model");
+const maxmenlModel = require("./schema/maxmen.model");
+const MaxwomenModel = require("./schema/women.model");
+const BoyModel = require("./schema/boys.model");
 
 const app = express();
 app.use(cors())
@@ -144,6 +148,40 @@ app.post("/login", async(req, res) => {
     res.status(401).send(error);
   }
 });
+app.get("/maxgirl",async(req,res)=>{
+  try {
+    const max = await maxgirlModel.find({});
+    res.status(200).send(max);
+  } catch (error) {
+    res.status(401).send(error);
+  }
+})
+
+app.get("/maxmen",async(req,res)=>{
+  try {
+    const max = await maxmenlModel.find({});
+    res.status(200).send(max);
+  } catch (error) {
+    res.status(401).send(error);
+  }
+})
+
+app.get("/women",async(req,res)=>{
+  try {
+    const max = await MaxwomenModel.find({});
+    res.status(200).send(max);
+  } catch (error) {
+    res.status(401).send(error);
+  }
+})
+app.get("/boy",async(req,res)=>{
+  try {
+    const max = await BoyModel.find({});
+    res.status(200).send(max);
+  } catch (error) {
+    res.status(401).send(error);
+  }
+})
 app.get("/users",async(req,res)=>{
   try {
     const { email,password,phonenumber} = req.body;
